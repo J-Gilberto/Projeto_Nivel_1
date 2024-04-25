@@ -1,6 +1,5 @@
 package Model;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import java.io.*;
@@ -56,6 +55,7 @@ public class PessoaFisicaRepo implements Serializable {
         }
     }
 
+    @SuppressWarnings("unchecked")
     public void recuperar(String arquivoNome) throws IOException, ClassNotFoundException {
         try (ObjectInputStream inputStream = new ObjectInputStream(new FileInputStream(arquivoNome))) {
             listaPessoaFisicas = (List<PessoaFisica>) inputStream.readObject();
