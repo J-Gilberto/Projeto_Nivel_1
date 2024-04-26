@@ -92,7 +92,7 @@ public class CadastroPOO {
         int cadastroTipo = scan.nextInt();
         scan.nextInt();
         try {
-            switch (STR) {
+            switch (cadastroTipo) {
                 case 1 -> alterarPessoaFisica();
                 case 2 -> alterarPessoaJuridica();
                 default -> System.out.println("Opção Inválida.");
@@ -102,6 +102,62 @@ public class CadastroPOO {
         }
     }
 
-    private static void alterarPessoaFisica(){
-        
+    private static void alterarPessoaFisica() {
+        System.out.println("Digite o ID que precisa ser alterado:");
+        int id = scan.nextInt();
+        PessoaFisica pessoa = rPessoaFisica.obter(id);
+        if (pessoa != null) {
+            System.out.println("Dados atuais do Usuario:");
+            pessoa.exibir();
+            System.out.println("Entre com os novos dados: (CPF, Nome e Idade)");
+            String cpf = scan.next();
+            String nome = scan.next();
+            int idade = scan.nextInt();
+            pessoa.setCpf(cpf);
+            pessoa.setNome(nome);
+            pessoa.setIdade(idade);
+            rPessoaFisica.alterar(pessoa);
+            System.out.println("Pessoa física alterada com exito!");
+        } else {
+            System.out.println("Pessoa física com ID não encontrado.");
+        }
     }
+
+    private static void alterarPessoaJuridica() {
+        System.out.println("Digite o ID que precisa ser alterado:");
+        int id = scan.nextInt();
+        PessoaJuridica pessoa = rPessoaJuridica.obter(id);
+        if (pessoa != null) {
+            System.out.println("Dados atuais do Usuario:");
+            pessoa.exibir();
+            System.out.println("Entre com os novos dados: (CNPJ e Nome)");
+            String cnpj = scan.next();
+            String nome = scan.next();
+            pessoa.setNome(nome);
+            pessoa.setCnpj(cnpj);
+            rPessoaJuridica.alterar(pessoa);
+            System.out.println("Pessoa Juridica alterada com exito!");
+        } else {
+            System.out.println("Pessoa Juridica com ID não encontrado.");
+        }
+    }
+
+    private static void excluirPessoa() {
+        System.out.println("Escolha a opcao (1) - Pessoa Física, (2) - Pessoa Juridica:");
+        int cadastroTipo = scan.nextInt();
+        scan.nextInt();
+        try {
+            switch (STR) {
+                case 1 -> excluirPessoaFisica();
+                case 2 -> excluirPessoaJuridica();
+                default -> System.out.println("Opção Invalida");
+            }
+        } catch (InputMismatchException e) {
+            System.out.println("Entrada invalida, Cetifique-se de colocar um número valido.");
+        }
+    }
+
+    private static void excluirPessoaFisica() {
+
+    }
+}
