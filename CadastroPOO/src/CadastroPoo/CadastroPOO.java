@@ -5,7 +5,6 @@ import Model.PessoaFisica;
 import Model.PessoaFisicaRepo;
 import Model.PessoaJuridica;
 import Model.PessoaJuridicaRepo;
-
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
@@ -119,7 +118,7 @@ public class CadastroPOO {
             rPessoaFisica.alterar(pessoa);
             System.out.println("Pessoa física alterada com exito!");
         } else {
-            System.out.println("Pessoa física com ID não encontrado.");
+            System.out.println("Pessoa fisica não encontrada");
         }
     }
 
@@ -138,7 +137,7 @@ public class CadastroPOO {
             rPessoaJuridica.alterar(pessoa);
             System.out.println("Pessoa Juridica alterada com exito!");
         } else {
-            System.out.println("Pessoa Juridica com ID não encontrado.");
+            System.out.println("Pessoa Juridica não encontrada");
         }
     }
 
@@ -147,9 +146,86 @@ public class CadastroPOO {
         int cadastroTipo = scan.nextInt();
         scan.nextInt();
         try {
-            switch (STR) {
+            switch (cadastroTipo) {
                 case 1 -> excluirPessoaFisica();
                 case 2 -> excluirPessoaJuridica();
+                default -> System.out.println("Opção Invalida");
+            }
+        } catch (InputMismatchException e) {
+            System.out.println("InputMismatchException e");
+        }
+    }
+
+    private static void excluirPessoaFisica() {
+        System.out.println("Por favor entre com o ID da pessoa que vai ser Excluida: ");
+        int id = scan.nextInt();
+        PessoaFisica pessoa = rPessoaFisica.obter(id);
+        if (pessoa != null) {
+            rPessoaFisica.excluir(id);
+            System.out.println("Pessoa fisica Excluida com Exito!");
+
+        } else {
+            System.out.println("Pessoa fisica não encontrada");
+        }
+    }
+
+    private static void excluirPessoaJuridica() {
+        System.out.println("Por favor entre com o ID da Pessoa Jurica que vai ser Excluida: ");
+        int id = scan.nextInt();
+        PessoaJuridica pessoa = rPessoaJuridica.obter(id);
+        if (pessoa != null) {
+            rPessoaJuridica.excluir(id);
+            System.out.println("Pessoa Juridica excluida com Exito!");
+        } else {
+            System.out.println("Pessoa Juridica não encontrada");
+        }
+    }
+
+    private static void exibirPessoaId() {
+        System.out.println("Escolha a opcao (1) - Pessoa Física, (2) - Pessoa Juridica:");
+        int cadastroTipo = scan.nextInt();
+        scan.nextInt();
+        try {
+            switch (cadastroTipo) {
+                case 1 -> exibirPessoaFisicaId();
+                case 2 -> exibirPessoaJuridicaId();
+                default -> System.out.println("Opção invalida");
+            }
+        } catch (InputMismatchException e) {
+            System.out.println("Entrada invalida, Cetifique-se de colocar um número valido.");
+        }
+    }
+
+    private static void exibirPessoaFisicaId() {
+        System.out.println("Entre com o ID da pessoa fisica que vai ser exebida: ");
+        int id = scan.nextInt();
+        PessoaFisica pessoa = rPessoaFisica.obter(id);
+        if (pessoa != null) {
+            pessoa.exibir();
+        } else {
+            System.out.println("Pessoa fisica não encontrada");
+        }
+    }
+
+    private static void exibirPessoaJuridicaId() {
+        System.out.println("Entre com o ID da pessoa juridica que vai ser exebida: ");
+        int id = scan.nextInt();
+        PessoaJuridica pessoa = rPessoaJuridica.obter(id);
+        if (pessoa != null) {
+            pessoa.exibir();
+        } else {
+            System.out.println("Pessoa Juridica não encontrada");
+        }
+    }
+
+    private void exibirTodasPessoas() {
+        System.out.println("Escolha a opcao (1) - Pessoa Física, (2) - Pessoa Juridica:");
+        int cadastroTipo = scan.nextInt();
+        scan.nextInt();
+        try {
+            switch (cadastroTipo) {
+                case 1 -> exibirTodasPessoasFisicas();
+                case 2 -> exibirTodasPessoasJuridicas();
                 default -> System.out.println("Opção Invalida");
             }
         } catch (InputMismatchException e) {
@@ -157,7 +233,17 @@ public class CadastroPOO {
         }
     }
 
-    private static void excluirPessoaFisica() {
+    private void exibirTodasPessoasFisicas() {
+        System.out.println("Pessoas Fisicas");
+        for (PessoaFisica pessoa : rPessoaFisica.obterTodos()) {
+            pessoa.exibir();
+            System.out.println();
+        }
+    }
+
+    private void exibirTodasPessoasJuridicas() {
+        System.out.println("Pessoas Juridicas");
 
     }
+
 }
