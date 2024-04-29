@@ -218,7 +218,7 @@ public class CadastroPOO {
         }
     }
 
-    private void exibirTodasPessoas() {
+    private static void exibirTodasPessoas() {
         System.out.println("Escolha a opcao (1) - Pessoa Física, (2) - Pessoa Juridica:");
         int cadastroTipo = scan.nextInt();
         scan.nextInt();
@@ -233,7 +233,7 @@ public class CadastroPOO {
         }
     }
 
-    private void exibirTodasPessoasFisicas() {
+    private static void exibirTodasPessoasFisicas() {
         System.out.println("Pessoas Fisicas");
         for (PessoaFisica pessoa : rPessoaFisica.obterTodos()) {
             pessoa.exibir();
@@ -241,9 +241,35 @@ public class CadastroPOO {
         }
     }
 
-    private void exibirTodasPessoasJuridicas() {
+    private static void exibirTodasPessoasJuridicas() {
         System.out.println("Pessoas Juridicas");
-
+        for (PessoaJuridica pessoa : rPessoaJuridica.obterTodos()) {
+            pessoa.exibir();
+            System.out.println();
+        }
     }
 
+    private static void salvarDados() {
+        System.out.println("Entre com o prefixo para salvar os arquivos: ");
+        String salvarComo = scan.next();
+        try {
+            rPessoaFisica.persistir(salvarComo + ".fisica.bin");
+            rPessoaJuridica.persistir(salvarComo + ".juridica.bin");
+            System.out.println("Dados salvos com Exito!");
+        } catch (IOException e) {
+            System.out.println("Erro, não consigo salavr seus dados!" + e.getMessage());
+        }
+    }
+
+    private static void recuperarDados() {
+        System.out.println("Entre com o prefixo para recuperar os arquivos: ");
+        String recuperarComo = scan.next();
+        try {
+            rPessoaFisica.recuperar(recuperarComo + ".fisica.bin");
+            rPessoaJuridica.recuperar(recuperarComo + ".juridica.bin");
+            System.out.println("Dados recuperados com Exito!");
+        } catch (IOException | ClassNotFoundException e) {
+            System.out.println("Erro na tentativa de recuperar seus dados." + e.getMessage());
+        }
+    }
 }
