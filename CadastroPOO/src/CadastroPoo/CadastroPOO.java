@@ -37,14 +37,14 @@ public class CadastroPOO {
 
     private static void exibirMenu() {
         System.out.println("Selecione uma opção: ");
-        System.out.println("1 - Incluir");
+        System.out.println("1 - Adicionar");
         System.out.println("2 - Alterar");
         System.out.println("3 - Excluir");
-        System.out.println("4 - Exibir pelo ID");
-        System.out.println("5 - Exibir todos");
-        System.out.println("6 - Salvar dados");
-        System.out.println("7 - Recuperar dados");
-        System.out.println("0 - Finalizar");
+        System.out.println("4 - Apresentar pelo ID");
+        System.out.println("5 - Apresentar todos");
+        System.out.println("6 - Salvar todos os dados");
+        System.out.println("7 - Recuperar os dados");
+        System.out.println("0 - Terminar");
     }
 
     private static int receberOpcao() {
